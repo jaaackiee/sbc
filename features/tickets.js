@@ -129,7 +129,7 @@ module.exports = async (client) => {
             interaction.channel.send("Claimed by <@" + interaction.user.id + ">");
 
             interaction.channel.permissionOverwrites.create(interaction.user, {
-                SendMessages: allow
+                SendMessages: true
             });
         } else if (interaction.customId === "close") {
             interaction.update({
