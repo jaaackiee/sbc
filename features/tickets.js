@@ -6,6 +6,7 @@ module.exports = async (client) => {
             await interaction.guild.channels.create({
                 name: interaction.customId + "-" + interaction.user.username,
                 parent: "1069475144076116038",
+                topic: interaction.user.id,
                 permissionOverwrites: [
                     {
                         id: interaction.user.id,
@@ -48,6 +49,7 @@ module.exports = async (client) => {
             await interaction.guild.channels.create({
                 name: interaction.customId + "-" + interaction.user.username,
                 parent: "1069455511377952910",
+                topic: interaction.user.id,
                 permissionOverwrites: [
                     {
                         id: interaction.user.id,
@@ -85,6 +87,7 @@ module.exports = async (client) => {
             await interaction.guild.channels.create({
                 name: interaction.customId + "-" + interaction.user.username,
                 parent: "1069469477277794334",
+                topic: interaction.user.id,
                 permissionOverwrites: [
                     {
                         id: interaction.user.id,
@@ -118,17 +121,25 @@ module.exports = async (client) => {
                 });
             });
         } else if (interaction.customId === "claim") {
+            if (interaction.user.id === interaction.channel.topic) {
+                return interaction.reply({
+                    content: "You cannot claim your own ticket!",
+                    ephemeral: true
+                });
+            }
+            
             interaction.update({
                 components: [
                     new ActionRowBuilder()
                         .addComponents(new ButtonBuilder().setCustomId("close").setLabel("Close").setStyle("Primary").setEmoji("🔒"))
                         .addComponents(new ButtonBuilder().setCustomId("claim").setLabel("Claim").setStyle("Primary").setEmoji("📌").setDisabled(true))
+                        .addComponents(new ButtonBuilder().setCustomId(interaction.user.id).setLabel("Unclaim").setStyle("Primary").setEmoji("🔓"))
                 ]
             });
 
             interaction.channel.send("Claimed by <@" + interaction.user.id + ">");
 
-            interaction.channel.permissionOverwrites.create(interaction.user, {
+            interaction.channel.permissionOverwrites.edit(interaction.user, {
                 SendMessages: true
             });
         } else if (interaction.customId === "close") {
@@ -144,6 +155,18 @@ module.exports = async (client) => {
             setTimeout(() => {
                 interaction.channel.delete();
             }, 10 * 1000);
+        } else if (interaction.customId === interaction.user.id) {
+            interaction.update({
+                components: [
+                    new ActionRowBuilder()
+                        .addComponents(new ButtonBuilder().setCustomId("close").setLabel("Close").setStyle("Primary").setEmoji("🔒"))
+                        .addComponents(new ButtonBuilder().setCustomId("claim").setLabel("Claim").setStyle("Primary").setEmoji("📌"))
+                ]
+            });
+            
+            interaction.channel.permissionOverwrites.edit(interaction.user, {
+                SendMessages: false
+            });
         }
     });
 }
