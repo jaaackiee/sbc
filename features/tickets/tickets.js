@@ -38,43 +38,6 @@ module.exports = async (client) => {
                     ephemeral: true
                 });
             });
-        } else if (interaction.channel.id === "1067870551563059211") {
-            await interaction.guild.channels.create({
-                name: interaction.customId + "-" + interaction.user.username,
-                parent: "1069469477277794334",
-                topic: interaction.user.id,
-                permissionOverwrites: [
-                    {
-                        id: interaction.user.id,
-                        allow: [PermissionFlagsBits.ViewChannel, PermissionFlagsBits.SendMessages]
-                    },
-                    {
-                        id: interaction.guild.id,
-                        deny: [PermissionFlagsBits.ViewChannel]
-                    },
-                    {
-                        id: "1069466970216468532",
-                        allow: [PermissionFlagsBits.ViewChannel]
-                    }
-                ]
-            }).then((channel) => {
-                const closeButton = new ActionRowBuilder()
-                    .addComponents(new ButtonBuilder().setCustomId("close").setLabel("Close").setStyle("Primary").setEmoji("🔒"))
-                    .addComponents(new ButtonBuilder().setCustomId("claim").setLabel("Claim").setStyle("Primary").setEmoji("📌"));
-                const embed = new EmbedBuilder()
-                    .setColor("Green")
-                    .setDescription("Welcome **" + interaction.user.username + "**!\nPlease specify which slayer boss you would like.\nA carrier will be with you as soon as possible. Thank you. 🙌");
-                channel.send({
-                    content: "<@&1069466970216468532> -- <@" + interaction.user.id + ">",
-                    embeds: [embed],
-                    components: [closeButton]
-                });
-
-                interaction.reply({
-                    content: "Ticket created: <#" + channel.id + ">",
-                    ephemeral: true
-                });
-            });
         } else if (interaction.customId === "claim") {
             if (interaction.user.id === interaction.channel.topic) {
                 return interaction.reply({

@@ -2,30 +2,29 @@ const { PermissionFlagsBits, EmbedBuilder, ActionRowBuilder, ButtonBuilder } = r
 
 module.exports = async (client) => {
     client.on("interactionCreate", async (interaction) => {
-        if (interaction.channel.id !== "1067870512493105232") return;
+        if (interaction.channel.id !== "1067870551563059211") return;
 
         let id;
-        switch (interaction.customId) {
-            case "f4":
-                id = "1069847263364517898";
+        switch(interaction.customId) {
+            case "rev":
+                id = "1067875956791984138";
                 break;
-            case "f5":
-                id = "1069847218481287188";
+            case "tara":
+                id = "1067877646769344523";
                 break;
-            case "f6":
-                id = "1069847169470844948";
+            case "sven":
+                id = "1067877660312731699";
                 break;
-            case "f7":
-                id = "1069846966399410226";
+            case "eman":
+                id = "1067877074485915658";
                 break;
             default:
-                console.log(interaction.customId);
                 return;
         }
 
         await interaction.guild.channels.create({
             name: interaction.customId + "-" + interaction.user.username,
-                parent: "1069455511377952910",
+                parent: "1069469477277794334",
                 topic: interaction.user.id,
                 permissionOverwrites: [
                     {
@@ -47,7 +46,7 @@ module.exports = async (client) => {
                 .addComponents(new ButtonBuilder().setCustomId("claim").setLabel("Claim").setStyle("Primary").setEmoji("📌"));
             const embed = new EmbedBuilder()
                 .setColor("Green")
-                .setDescription("Welcome **" + interaction.user.username + "**!\nPlease state your IGN (In-Game Name) and which score you would like.\nA carrier will be with you as soon as possible. Thank you. 🙌");
+                .setDescription("Welcome **" + interaction.user.username + "**!\nPlease state your IGN (In-Game Name) and which tier you would like.\nA carrier will be with you as soon as possible. Thank you. 🙌");
             channel.send({
                 content: "<@&" + id + "> -- <@" + interaction.user.id + ">",
                 embeds: [embed],
