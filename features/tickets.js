@@ -33,7 +33,8 @@ module.exports = async (client) => {
                 });
 
                 interaction.reply({
-                    content: "Ticket created: <#" + channel.id + ">" 
+                    content: "Ticket created: <#" + channel.id + ">",
+                    ephemeral: true
                 });
             });
             // dungeon
@@ -75,7 +76,8 @@ module.exports = async (client) => {
                 });
 
                 interaction.reply({
-                    content: "Ticket created: <#" + channel.id + ">" 
+                    content: "Ticket created: <#" + channel.id + ">",
+                    ephemeral: true
                 });
             });
             // slayer
@@ -111,7 +113,8 @@ module.exports = async (client) => {
                 });
 
                 interaction.reply({
-                    content: "Ticket created: <#" + channel.id + ">" 
+                    content: "Ticket created: <#" + channel.id + ">",
+                    ephemeral: true
                 });
             });
         } else if (interaction.customId === "claim") {
