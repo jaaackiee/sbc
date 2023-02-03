@@ -38,51 +38,6 @@ module.exports = async (client) => {
                     ephemeral: true
                 });
             });
-            // dungeon
-        } else if (interaction.channel.id === "1067870512493105232") {
-            /*
-            switch(interaction.customId) {
-                case "f4":
-
-            }
-            */
-            await interaction.guild.channels.create({
-                name: interaction.customId + "-" + interaction.user.username,
-                parent: "1069455511377952910",
-                topic: interaction.user.id,
-                permissionOverwrites: [
-                    {
-                        id: interaction.user.id,
-                        allow: [PermissionFlagsBits.ViewChannel, PermissionFlagsBits.SendMessages]
-                    },
-                    {
-                        id: interaction.guild.id,
-                        deny: [PermissionFlagsBits.ViewChannel]
-                    },
-                    {
-                        id: "1066543680648913018",
-                        allow: [PermissionFlagsBits.ViewChannel]
-                    }
-                ]
-            }).then((channel) => {
-                const closeButton = new ActionRowBuilder()
-                    .addComponents(new ButtonBuilder().setCustomId("close").setLabel("Close").setStyle("Primary").setEmoji("🔒"))
-                    .addComponents(new ButtonBuilder().setCustomId("claim").setLabel("Claim").setStyle("Primary").setEmoji("📌"));
-                const embed = new EmbedBuilder()
-                    .setColor("Green")
-                    .setDescription("Welcome **" + interaction.user.username + "**!\nPlease specify which floor and score you would like.\nA carrier will be with you as soon as possible. Thank you. 🙌");
-                channel.send({
-                    content: "<@&1066543680648913018> -- <@" + interaction.user.id + ">",
-                    embeds: [embed],
-                    components: [closeButton]
-                });
-
-                interaction.reply({
-                    content: "Ticket created: <#" + channel.id + ">",
-                    ephemeral: true
-                });
-            });
-            // slayer
         } else if (interaction.channel.id === "1067870551563059211") {
             await interaction.guild.channels.create({
                 name: interaction.customId + "-" + interaction.user.username,
