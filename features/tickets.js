@@ -59,7 +59,7 @@ module.exports = async (client) => {
                     },
                     {
                         id: "1066543680648913018",
-                        allow: [PermissionFlagsBits.ViewChannel, PermissionFlagsBits.SendMessages]
+                        allow: [PermissionFlagsBits.ViewChannel]
                     }
                 ]
             }).then((channel) => {
@@ -96,7 +96,7 @@ module.exports = async (client) => {
                     },
                     {
                         id: "1069466970216468532",
-                        allow: [PermissionFlagsBits.ViewChannel, PermissionFlagsBits.SendMessages]
+                        allow: [PermissionFlagsBits.ViewChannel]
                     }
                 ]
             }).then((channel) => {
@@ -127,6 +127,10 @@ module.exports = async (client) => {
             });
 
             interaction.channel.send("Claimed by <@" + interaction.user.id + ">");
+
+            interaction.channel.permissionOverwrites.create(interaction.user, {
+                allow: [PermissionFlagsBits.SendMessages]
+            });
         } else if (interaction.customId === "close") {
             interaction.update({
                 components: [
