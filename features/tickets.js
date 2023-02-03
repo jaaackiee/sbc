@@ -2,7 +2,7 @@ const { PermissionFlagsBits, EmbedBuilder, ActionRowBuilder, ButtonBuilder } = r
 module.exports = async (client) => {
     client.on("interactionCreate", async (interaction) => {
         // apply
-        if (interaction.channel.id === "1070811097772339280") {
+        if (interaction.channel.id === "1067888604069761107") {
             await interaction.guild.channels.create({
                 name: interaction.customId + "-" + interaction.user.username,
                 parent: "1069475144076116038",
@@ -31,9 +31,13 @@ module.exports = async (client) => {
                     embeds: [embed],
                     components: [closeButton]
                 });
+
+                interaction.reply({
+                    content: "Ticket created: <#" + channel.id + ">" 
+                });
             });
             // dungeon
-        } else if (interaction.channel.id === "1070810490806227024") {
+        } else if (interaction.channel.id === "1067870512493105232") {
             /*
             switch(interaction.customId) {
                 case "f4":
@@ -69,9 +73,13 @@ module.exports = async (client) => {
                     embeds: [embed],
                     components: [closeButton]
                 });
+
+                interaction.reply({
+                    content: "Ticket created: <#" + channel.id + ">" 
+                });
             });
             // slayer
-        } else if (interaction.channel.id === "1070810989194383430") {
+        } else if (interaction.channel.id === "1067870551563059211") {
             await interaction.guild.channels.create({
                 name: interaction.customId + "-" + interaction.user.username,
                 parent: "1069469477277794334",
@@ -101,6 +109,10 @@ module.exports = async (client) => {
                     embeds: [embed],
                     components: [closeButton]
                 });
+
+                interaction.reply({
+                    content: "Ticket created: <#" + channel.id + ">" 
+                });
             });
         } else if (interaction.customId === "claim") {
             interaction.update({
@@ -117,7 +129,6 @@ module.exports = async (client) => {
                 components: [
                     new ActionRowBuilder()
                         .addComponents(new ButtonBuilder().setCustomId("close").setLabel("Close").setStyle("Primary").setEmoji("🔒").setDisabled(true))
-                        .addComponents(new ButtonBuilder().setCustomId("claim").setLabel("Claim").setStyle("Primary").setEmoji("📌").setDisabled(true))
                 ]
             });
 
